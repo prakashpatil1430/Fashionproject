@@ -1,0 +1,256 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    {% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'fashion/css/style1.css'%}">
+    {% endblock stylesheet %}
+
+    <!-- product area -->
+
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-2 ml-5 offset-1" style="margin-left: 80px;">
+                <div id="mobile-filter">
+
+                    <div>
+                        <h6 class="p-1 border-bottom text-center">Category</h6>
+
+                        <ul>
+
+                            <li>
+                                <div class="btn-group dropend mb-2">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Perfume&nbsp;
+                                    </button>
+                                    <ul class="dropdown-menu ">
+                                        <li><a href="{% url 'perfume' %}" class="ml-1"> &nbsp; &nbsp;All</a></li>
+                                        <li><a href="{% url 'perfume' 'Above1000' %}" class="ml-1"> &nbsp; &nbsp;Above
+                                                1000</a></li>
+                                        <li><a href="{% url 'perfume' 'Below1000' %}" class="ml-1"> &nbsp; &nbsp;Below
+                                                1000</a></li>
+
+                                    </ul>
+                                </div>
+                                <div class="btn-group dropend mb-2">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Watches
+                                    </button>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{% url 'watches'%}" class="ml-1"> &nbsp; &nbsp;All</a></li>
+                                        <li><a href="{% url 'watches' 'm-watch' %}" class="ml-1"> &nbsp; &nbsp;Men
+                                                watch</a></li>
+                                        <li><a href="{% url 'watches' 'w-watch' %}" class="ml-1"> &nbsp; &nbsp;Woman
+                                                watch</a></li>
+                                        <li><a href="{% url 'watches' 'Above1000' %}" class="ml-1"> &nbsp; &nbsp;Above
+                                                1000</a></li>
+                                        <li><a href="{% url 'watches' 'Below1000' %}" class="ml-1"> &nbsp; &nbsp;Below
+                                                1000</a></li>
+
+                                    </ul>
+                                </div>
+                                <div class="btn-group dropend mb-2">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Shirts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </button>
+                                    <ul class="dropdown-menu ">
+                                        <li><a href="{% url 'tshirts'%}" class="ml-1"> &nbsp; &nbsp;All</a></li>
+                                        <li><a href="{% url 'tshirts' 'm-tshirt' %}" class="ml-1"> &nbsp; &nbsp;Men
+                                                Tshirt</a></li>
+                                        <li><a href="{% url 'tshirts' 'w-tshirt' %}" class="ml-1"> &nbsp; &nbsp;Woman
+                                                Tshirt</a></li>
+                                        <li><a href="{% url 'tshirts' 'Above1000' %}" class="ml-1"> &nbsp; &nbsp;Above
+                                                1000</a></li>
+                                        <li><a href="{% url 'tshirts' 'Below1000' %}" class="ml-1"> &nbsp; &nbsp;Below
+                                                1000</a></li>
+
+                                    </ul>
+                                </div>
+                                <div class="btn-group dropend mb-2">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        shoes &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </button>
+                                    <ul class="dropdown-menu ">
+                                        <li><a href="{% url 'shoes'%}" class="ml-1"> &nbsp; &nbsp;All</a></li>
+                                        <li><a href="{% url 'shoes' 'man-shoes' %}" class="ml-1"> &nbsp; &nbsp;Men
+                                                shoes</a></li>
+                                        <li><a href="{% url 'shoes' 'women-shoes' %}" class="ml-1"> &nbsp; &nbsp;Woman
+                                                shoes</a></li>
+                                        <li><a href="{% url 'shoes' 'Above1000' %}" class="ml-1"> &nbsp; &nbsp;Above
+                                                1000</a></li>
+                                        <li><a href="{% url 'shoes' 'Below1000' %}" class="ml-1"> &nbsp; &nbsp;Below
+                                                1000</a></li>
+
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div>
+                        <h6 class="p-1 border-bottom">Filter By</h6>
+                        <p class="mb-2">Color</p>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-action mb-2 rounded"><a href="#"> <span
+                                        class="fa fa-circle pr-1" id="red"></span> &nbsp;Red</a></li>
+                            <li class="list-group-item list-group-item-action mb-2 rounded"><a href="#"> <span
+                                        class="fa fa-circle pr-1" id="teal"></span>&nbsp;Teal </a></li>
+                            <li class="list-group-item list-group-item-action mb-2 rounded"><a href="#"> <span
+                                        class="fa fa-circle pr-1" id="blue"></span>&nbsp;Blue </a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-8 offset-1">
+                <section id="product">
+                    <div class="row">
+
+
+                        {% if perfume %}
+                        {% for item in perfume %}
+                        <div class="col-md-4 mt-3">
+                            <div class="card ">
+                                <img class="card-img-top" src="{{item.product_image.url}}" alt="Cards image cap">
+                                <div class="card-body">
+                                    <p class="card-text text-center">{{item.title}}</p>
+                                    <p class="text-center">${{item.discounted_price}}</p>
+                                    <div class=" text-center">
+                                        <span class="fa fa-circle " id="red"></span> <span class="fa fa-circle"
+                                            id="teal"></span> <span class="fa fa-circle" id="blue"></span>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-primary btn-sm"
+                                            href="{% url 'product-detail' item.id %}" role="button">View</a>
+                                        <form action="/add-to-cart" class="d-inline">
+                                            <input type="hidden" name="prod_id" value="{{item.id}}" id="prod_id">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">Add
+                                                Cart</button>
+                                        </form>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        {% elif shoes %}
+
+                        {% for item in shoes %}
+                        <div class="col-md-4 mt-3">
+                            <div class="card ">
+                                <img class="card-img-top" src="{{item.product_image.url}}" alt="Cards image cap">
+                                <div class="card-body">
+                                    <p class="card-text text-center">{{item.title}}</p>
+                                    <p class="text-center">${{item.discounted_price}}</p>
+                                    <div class=" text-center">
+                                        <span class="fa fa-circle " id="red"></span> <span class="fa fa-circle"
+                                            id="teal"></span> <span class="fa fa-circle" id="blue"></span>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-primary btn-sm"
+                                            href="{% url 'product-detail' item.id %}" role="button">View</a>
+                                        <form action="/add-to-cart" class="d-inline">
+                                            <input type="hidden" name="prod_id" value="{{item.id}}" id="prod_id">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">Add
+                                                Cart</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                        {% elif watches %}
+
+                        {% for item in watches %}
+                        <div class="col-md-4 mt-3">
+                            <div class="card ">
+                                <img class="card-img-top" src="{{item.product_image.url}}" alt="Cards image cap">
+                                <div class="card-body">
+                                    <p class="card-text text-center">{{item.title}}</p>
+                                    <p class="text-center">${{item.discounted_price}}</p>
+                                    <div class=" text-center">
+                                        <span class="fa fa-circle " id="red"></span> <span class="fa fa-circle"
+                                            id="teal"></span> <span class="fa fa-circle" id="blue"></span>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-primary btn-sm"
+                                            href="{% url 'product-detail' item.id %}" role="button">View</a>
+                                        <form action="/add-to-cart" class="d-inline">
+                                            <input type="hidden" name="prod_id" value="{{item.id}}" id="prod_id">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">Add
+                                                Cart</button>
+                                        </form>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% elif tshirts %}
+
+                        {% for item in tshirts %}
+                        <div class="col-md-4 mt-3">
+                            <div class="card ">
+                                <img class="card-img-top" src="{{item.product_image.url}}" alt="Cards image cap">
+                                <div class="card-body">
+                                    <p class="card-text text-center">{{item.title}}</p>
+                                    <p class="text-center">${{item.discounted_price}}</p>
+                                    <div class=" text-center">
+                                        <span class="fa fa-circle " id="red"></span> <span class="fa fa-circle"
+                                            id="teal"></span> <span class="fa fa-circle" id="blue"></span>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-primary btn-sm"
+                                            href="{% url 'product-detail' item.id %}" role="button">View</a>
+
+                                        <form action="/add-to-cart" class="d-inline">
+                                            <input type="hidden" name="prod_id" value="{{item.id}}" id="prod_id">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">Add
+                                                Cart</button>
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+
+                        {% endif %}
+
+                    </div>
+            </div>
+            </section>
+
+        </div>
+    </div>
+    </div>
+    <!-- end product area -->
+
+
+ 
+
+
+    </body>
+
+</html>

@@ -1,0 +1,77 @@
+<section id="header">
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><span class="text-danger font-weight-bold">fashion</span>&nbsp;shop
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-md-auto gap-2">
+          <li class="nav-item rounded">
+            <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house-fill me-2"></i>Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Products
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
+              <li><a class="dropdown-item" href="{% url 'perfume' %}">Perfumes</a></li>
+              <li><a class="dropdown-item" href="{% url 'watches' %}">Watches</a></li>
+              <li><a class="dropdown-item" href="{% url 'tshirts' %}">T-shirt</a></li>
+              <li><a class="dropdown-item" href="{% url 'shoes' %}">Shoes</a></li>
+
+
+
+            </ul>
+          </li>
+          <li class="nav-item rounded">
+            <a class="nav-link" href="#top"><i class="bi bi-people-fill me-2"></i>Offers</a>
+          </li>
+          <li class="nav-item rounded">
+            <a class="nav-link" href="#contact"><i class="bi bi-telephone-fill me-2"></i>Contact</a>
+          </li>
+          <li class="nav-item rounded">
+            <form class="d-flex">
+              <input class="form-control me-2 p-1" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-warning px-1" type="submit">S</button>
+            </form>
+          </li>
+          <li class="nav-item dropdown rounded">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false"><i class="bi bi-person-fill me-2"></i>{{request.user.username|capfirst}}</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+              <hr class="dropdown-divider">
+          </li>
+          {% if request.user.is_authenticated %}
+          <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+          <li><a class="dropdown-item" href="{% url 'orders'%}">Orders</a></li>
+          <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
+          <li><a class="dropdown-item" href="{% url 'logout'%}">Logout</a></li>
+          {% else %}   
+          <li><a class="dropdown-item" href="{% url 'login'%}">Login</a></li>
+          <li><a class="dropdown-item" href="{% url 'customerregistration' %}">Register</a></li>
+          {% endif %}
+      
+         
+          
+        </ul>
+        </li>
+
+        <li class="nav-item mx-2">
+          <a href="{% url 'cart' %}" class="nav-link text-white"><span class="badge bg-danger">{{totalitem}}</span> Cart
+
+          </a>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</section>
+<!--header ends -->
